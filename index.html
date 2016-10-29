@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Multicolored Circles In Grid
+		</title>
+		<script>
+			"use strict";
+			var voEWOCanvas;
+			var voEWOContext;
+			var vnEWORadius = 32;
+			var vnEWORed;
+			var vnEWOGreen;
+			var vnEWOBlue;
+			var vnEWOWidth;
+			var vnEWOHeight;
+			var vnEWOX;
+			var vnEWOY;
+			function fEWOPaint()
+			{
+				vnEWOX = Math.floor(Math.random() * (vnEWOWidth / (vnEWORadius * 2)));
+				vnEWOY = Math.floor(Math.random() * (vnEWOHeight / (vnEWORadius * 2)));
+
+				voEWOContext.clearRect(vnEWOX * (vnEWORadius * 2), vnEWOY * (vnEWORadius * 2), vnEWORadius * 2, vnEWORadius * 2);
+				voEWOContext.beginPath();
+				voEWOContext.arc(vnEWOX * (vnEWORadius * 2) + vnEWORadius, vnEWOY * (vnEWORadius * 2) + vnEWORadius, vnEWORadius - 1, 0, 2 * Math.PI);
+
+				vnEWORed = Math.floor(Math.random() * 256);
+				vnEWOGreen = Math.floor(Math.random() * 256);
+				vnEWOBlue = Math.floor(Math.random() * 256);
+				voEWOContext.strokeStyle = "rgb(" + vnEWORed + ", " + vnEWOGreen + ", " + vnEWOBlue + ")";
+				voEWOContext.lineWidth = 3;
+				voEWOContext.stroke();
+			}
+			function fEWOOnLoad()
+			{
+				voEWOCanvas = document.createElement("canvas");
+				voEWOCanvas.style.position = "absolute";
+				voEWOCanvas.style.left = "0";
+				voEWOCanvas.style.top = "0";
+				vnEWOWidth = window.innerWidth;
+				vnEWOHeight = window.innerHeight;
+				voEWOCanvas.width = vnEWOWidth;
+				voEWOCanvas.height = vnEWOHeight;
+				document.body.appendChild(voEWOCanvas);
+				voEWOContext = voEWOCanvas.getContext("2d");
+				setInterval(fEWOPaint, 1);
+			}
+			function fEWOOnResize()
+			{
+				vnEWOWidth = window.innerWidth;
+				vnEWOHeight = window.innerHeight;
+				voEWOCanvas.width = vnEWOWidth;
+				voEWOCanvas.height = vnEWOHeight;
+			}
+		</script>
+	</head>
+	<body onload="fEWOOnLoad()" onresize="fEWOOnResize()" style="background-color:black">
+	</body>
+</html>
